@@ -1,5 +1,8 @@
+import math
+
 class Q(object):
     def __init__(self,a,b):#コンストラクタ
+        gcd=math.gcd(a,b)
         self.a=a
         self.b=b
 
