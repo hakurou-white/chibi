@@ -4,7 +4,11 @@ class Q(object):
         self.b=b
 
     def __repr__(self):
-        return f'{self.a}/{self.b}'
+        if self.b==1:
+            return str(self.a)
+        else:    
+            return f'{self.a}/{self.b}'
 
 q=Q(1,2)
+q=Q(2,1)
 print(q)
