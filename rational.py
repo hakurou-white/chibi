@@ -1,14 +1,15 @@
-class Yuuri(object):
+class Q(object):
     def __init__(self):#コンストラクタ
-        self.yuuri=0
-
-    def 
-
+        self.a=0
+        self.b=0
     def reset(self):
-        self.yuuri=0
+        self.a=0
+        self.b=0
 
     def show(self):
         print(self.yuuri)
+
+    def 
 
     def __repr__(self): #文字列を返すと表示される
         return str(self.cnt)
