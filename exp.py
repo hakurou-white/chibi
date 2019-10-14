@@ -12,14 +12,29 @@ class Val(Expr):
     def eval(self):
         return self.value
 
+class Binary(Expr):
+    __slots__=['left','right']
+    def __init__(self,a,b):
+        self.left=a
+        self.right=b
+
+    def __repr__(self):
+        classname=self.__class__.__name__
+        return f'{classname}({self.left},{self.right})'
 v=Val(1)
 print(v)
 assert v.eval()==1
 
 assert isinstance(v,Expr) #==>T
 assert isinstance(v,Val) #==>T
-assert isinstance(v,int) #==>f
-class Add(object):
+assert not isinstance(v,int) #==>F
+
+def toExpr(a):
+    if not isinstance(a,Expr):
+        a=Val(a)
+    return a
+
+class Add(Expr):
     __slots__=['left','right']
     def __init__(self,a,b):
         self.left=a
@@ -27,39 +42,41 @@ class Add(object):
     def eval(self):
         return self.left.eval()+self.right.eval()
 
-e=Add(Val(1),Val(2))
+e=Add(1,2)
 assert e.eval()==3
-e=Add(Val(1),Add(Val(2),Val(3)))
+
+e=Add(1,Add(2,3))
 assert e.eval()==6
 
-class Mul(object):
+
+class Mul(Expr):
     __slots__=['left','right']
     def __init__(self,a,b):
         self.left=a
         self.right=b
     def eval(self):
         return self.left.eval()*self.right.eval()
-e=Mul(Val(1),Val(2))
+e=Mul(1,2)
 assert e.eval()==2
-e=Mul(Val(1),Mul(Val(2),Val(3)))
+e=Mul(1,Mul(2,3))
 assert e.eval()==6        
 
-class Sub(object):
+class Sub(Expr):
     __slots__=['left','right']
     def __init__(self,a,b):
         self.left=a
         self.right=b
     def eval(self):
         return self.left.eval()-self.right.eval()
-e=Sub(Val(1),Val(2))
+e=Sub(1,2)
 assert e.eval()==-1
 
-class Div(object):
+class Div(Expr):
     __slots__=['left','right']
     def __init__(self,a,b):
         self.left=a
         self.right=b
     def eval(self):
         return self.left.eval()/self.right.eval()
-e=Div(Val(7),Val(2))
+e=Div(7,2)
 assert e.eval()==3
