@@ -37,3 +37,13 @@ e=Mul(Val(1),Val(2))
 assert e.eval()==2
 e=Mul(Val(1),Mul(Val(2),Val(3)))
 assert e.eval()==6        
+
+class Sub(object):
+    __slots__=['left','right']
+    def __init__(self,a,b):
+        self.left=a
+        self.right=b
+    def eval(self):
+        return self.left.eval()-self.right.eval()
+e=Sub(Val(1),Val(2))
+assert e.eval()==-1
