@@ -1,6 +1,8 @@
 example Value 123
 example Zip 141-0001
+example Expr 1+2+3
 example Expr 1+2
+example Expr 1
 
 Zip={
     Value '-' Value
@@ -8,7 +10,7 @@ Zip={
 }
 
 Expr={
-    Value '+' Value
+    Value ('+' Value)*
     #Add
 }
 
