@@ -81,17 +81,15 @@ class Assign(Expr):
     def eval(self,env):
         env[self.name]=self.e.eval(env)
         return env[self.name]
-
+'''
 print('少しテスト')
-
 env={}
 e=Assign('x',Val(1)) #x=1
 print(e.eval(env)) #1
 e=Assign('x',Add(Var('x'),Val(2))) #x=x+2
 print(e.eval(env)) #3
-
 print('テスト終わり')
-
+'''
 
 def conv(tree):
     if tree == 'Block':
@@ -106,25 +104,30 @@ def conv(tree):
         return Mul(conv(tree[0]), conv(tree[1]))
     if tree == 'Mod':
         return Mod(conv(tree[0]), conv(tree[1]))
+    if tree=='Var':
+        return Var(str(tree))
+    if tree=='LetDecl':
+        return Assign(str(tree[0]),conv(tree[1]))
     print('@TODO', tree.tag)
     return Val(str(tree))
 
-def run(src: str):
+def run(src: str,env:dict):
     tree = parser(src)
     if tree.isError():
         print(repr(tree))
     else:
         e = conv(tree)
-        print(repr(e))
-        print(e.eval({}))
+        print('env',env)
+        print(e.eval(env))
 
 def main():
     try:
+        env={}
         while True:
             s = input('>>> ')
             if s == '':
                 break
-            run(s)
+            run(s,env)
     except EOFError:
         return
 if __name__ == '__main__':
