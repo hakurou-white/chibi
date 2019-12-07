@@ -20,6 +20,7 @@ def calc(s):
     return sum(nums)
 
 print(calc("1"))
+print(calc("2"))
 print(calc("1+2"))
 print(calc("1*2+3"))
 print(calc("1+2*3"))
