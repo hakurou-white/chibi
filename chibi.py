@@ -142,6 +142,13 @@ class If(Expr):
         else:
              return self.else_.eval(env)           
 
+e=Block(
+    Assign('x',Val(1)),
+    Assign('y',Val(2)),
+    If(Gt(Var('x'),Var('y')),Var('x'),Var('y'))
+)
+assert e.eval({})==2
+
 '''
 print('少しテスト')
 env={}
@@ -157,6 +164,8 @@ def conv(tree):
         return conv(tree[0])
     if tree=="If":
         return If(conv(tree[0]),conv(tree[1]),conv(tree[2]))
+    if tree=="While":
+        return While(conv(tree[0]),conv(tree[1]))
     if tree == 'Val' or tree == 'Int':
         return Val(int(str(tree)))
     if tree == 'Add':
