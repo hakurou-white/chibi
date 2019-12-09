@@ -114,20 +114,27 @@ class Assign(Expr):
 
 class Block(Expr):
     __slots__=['exprs']
-    def __init__(self,*exprs):
-        self.exprs=exprs
+    def __init__(self,*exprs):  #可変長個の引数
+        self.exprs=exprs    #リストになっている
     def eval(self,env):
-        yesorno=self.cond.eval(env)
-        if yesorno == 1:
-            return self.then.eval(env)
-        else:
-             return self.else_.eval(env)         
+        for e in self.exprs:
+            e.eval(env)
 
-class If(Expr):
+class While(Expr):
     __slots__=['cond','body']
     def __init__(self,cond,body):
         self.cond=cond
         self.body=body
+    def eval(self,env):
+        while self.cond.eval(env) != 0:
+            self.bpdy.eval(env)     
+
+class If(Expr):
+    __slots__=['cond','then','else_']
+    def __init__(self,cond,then,else_):
+        self.cond=cond
+        self.then=then
+        self.else_=else_
     def eval(self,env):
         yesorno=self.cond.eval(env)
         if yesorno == 1:
