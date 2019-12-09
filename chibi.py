@@ -111,6 +111,18 @@ class Assign(Expr):
     def eval(self,env):
         env[self.name]=self.e.eval(env)
         return env[self.name]
+
+class If(Expr):
+    __slots__=['cond','then','else']
+    def __init__(cond,then,else):
+        self.cond=cond
+        self.then=then
+        self.else=else_
+
+    def eval(self,env):
+        env[self.name]=self.e.eval(env)
+        return env[self.name]
+
 '''
 print('少しテスト')
 env={}
