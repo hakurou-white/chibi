@@ -9,7 +9,7 @@ class Ball:
         self.canvas.move(self.id,245,100)
 
     def draw(self):
-        pass
+        self.canvas.move(self.id,0,-1)
 
 tk=Tk()
 tk.title("Game")
@@ -22,6 +22,7 @@ tk.update()
 ball=Ball(canvas,'blue')
 
 while True:
+    ball.draw()
     tk.update_idletasks()
     tk.update()
     time.sleep(0.01)
