@@ -25,6 +25,16 @@ class Ball:
             self.x=3
         if pos[2]>=self.canvas_width:
             self.x=-3
+
+class Paddle:
+    def __init__(self,canvas,color):
+        self.canvas=canvas
+        self.id=canvas.create_rectangle(0,0,100,10,fill=color)
+        self.canvas.move(self.id,200,300)
+
+    def draw(self):
+        pass
+
 tk=Tk()
 tk.title("Game")
 tk.resizable(0,0)
@@ -33,10 +43,12 @@ canvas=Canvas(tk,width=500,height=400,bd=0,highlightthickness=0)
 canvas.pack()
 tk.update()
 
-ball=Ball(canvas,'blue')
+ball=Ball(canvas,'green')
+paddle=Paddle(canvas,'black')
 
 while True:
     ball.draw()
+    paddle.draw()
     tk.update_idletasks()
     tk.update()
     time.sleep(0.01)
