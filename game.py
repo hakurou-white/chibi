@@ -78,12 +78,19 @@ if num=="":
     paddle=Paddle(canvas,'black')
     ball=Ball(canvas,paddle,'green')
 
+num=0
 while True:
+    if num==1:
+        time.sleep(5)
+        break
     if ball.hit_bottom==False:
         ball.draw()
         paddle.draw()
     if ball.hit_bottom==True:
+        time.sleep(0.5)
         canvas.create_text(250,200,text='Game over!',font=('Times',30),fill='red')
+        num=1
     tk.update_idletasks()
     tk.update()
     time.sleep(0.01)
+    
