@@ -61,7 +61,9 @@ class Paddle:
     def turn_right(self,evt):
         self.x=2
 
-
+    def movestart(self,env):
+        self.num=1
+        
 tk=Tk()
 tk.title("Game")
 tk.resizable(0,0)
@@ -70,13 +72,18 @@ canvas=Canvas(tk,width=500,height=400,bd=0,highlightthickness=0)
 canvas.pack()
 tk.update()
 
-paddle=Paddle(canvas,'black')
-ball=Ball(canvas,paddle,'green')
+num=input()
+if num=="":
+    time.sleep(2)
+    paddle=Paddle(canvas,'black')
+    ball=Ball(canvas,paddle,'green')
 
 while True:
     if ball.hit_bottom==False:
         ball.draw()
         paddle.draw()
+    if ball.hit_bottom==True:
+        canvas.create_text(250,200,text='Game over!',font=('Times',30),fill='red')
     tk.update_idletasks()
     tk.update()
     time.sleep(0.01)
