@@ -47,6 +47,7 @@ class Paddle:
         self.canvas.bind_all('<KeyPress-Left>',self.turn_left)
         self.canvas.bind_all('<KeyPress-Right>',self.turn_right)
 
+
     def draw(self):
         self.canvas.move(self.id,self.x,0)
         pos=self.canvas.coords(self.id)
@@ -72,8 +73,8 @@ canvas=Canvas(tk,width=500,height=400,bd=0,highlightthickness=0)
 canvas.pack()
 tk.update()
 
-num=input()
-if num=="":
+start=input()
+if start=="":
     time.sleep(2)
     paddle=Paddle(canvas,'black')
     ball=Ball(canvas,paddle,'green')
@@ -86,7 +87,7 @@ while True:
     if ball.hit_bottom==False:
         ball.draw()
         paddle.draw()
-    if ball.hit_bottom==True:
+    else:
         time.sleep(0.5)
         canvas.create_text(250,200,text='Game over!',font=('Times',30),fill='red')
         num=1
